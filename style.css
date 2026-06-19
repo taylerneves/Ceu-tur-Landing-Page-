@@ -486,8 +486,8 @@ a, button, input, select, textarea { cursor: auto; }
 @media (max-width: 420px) {
   .cards-grid, .services-grid { grid-template-columns:1fr; }
   #planeHero {
-        top: 12%; /* Ajuste fino para telas muito pequenas */
-        width: 170px;
+        top: 25%; /* Ajuste fino para telas muito pequenas */
+        width: 300px;
     }
 }
 @media (prefers-reduced-motion: reduce) {
