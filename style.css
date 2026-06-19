@@ -467,7 +467,7 @@ a, button, input, select, textarea { cursor: auto; }
   .sobre-badge { display:flex; justify-content:center; }
   .contato-grid { grid-template-columns:1fr; }
 
-  #planeHero { top: 18%; width: 500px; left: 10%}
+  #planeHero { width: 500px; left: 10%}
 }
 @media (max-width: 640px) {
   .nav-links { display:none; }
