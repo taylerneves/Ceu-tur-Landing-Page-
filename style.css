@@ -99,6 +99,19 @@ a, button, input, select, textarea { cursor: auto; }
 }
 
 /* ── Avião principal ──────────────────────────── */
+#planeHero {
+    position: absolute;
+    top: 20%;    /* Ajuste aqui para ele ficar acima do texto */
+    left: 30%;   /* Centralizado */
+    z-index: 5;  /* Garante que fique atrás ou na frente de algo específico */
+    transition: none; 
+}
+
+#heroBrand {
+    position: relative;
+    z-index: 10; /* Garante que o texto fique acima do avião */
+}
+
 .plane-hero-wrap {
   position: relative;
   z-index: 10;
@@ -130,6 +143,7 @@ a, button, input, select, textarea { cursor: auto; }
   animation: none;
   transform: translate(-50%, 0);
 }
+
 
 /* ── Logo hero ────────────────────────────────── */
 .hero-brand {
