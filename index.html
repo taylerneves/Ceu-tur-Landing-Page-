@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Céu Tur – Sua Agência de Viagens</title>
+  <link rel="icon" type="image/png" href="assets/Logo.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/Logo.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- cursor avião personalizado (SVG inline) -->
+ 
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+
+    <!-- céu degradê + nuvens SVG -->
+    <div class="sky-layer" aria-hidden="true">
+      <!-- nuvens que drifam -->
+      <svg class="cloud-svg c1" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="150" cy="60" rx="130" ry="38" fill="white" opacity=".55"/>
+        <ellipse cx="110" cy="48" rx="70" ry="42" fill="white" opacity=".55"/>
+        <ellipse cx="190" cy="44" rx="80" ry="44" fill="white" opacity=".55"/>
+        <ellipse cx="150" cy="38" rx="60" ry="38" fill="white" opacity=".45"/>
+      </svg>
+      <svg class="cloud-svg c2" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="120" cy="50" rx="100" ry="30" fill="white" opacity=".45"/>
+        <ellipse cx="90"  cy="40" rx="60"  ry="36" fill="white" opacity=".45"/>
+        <ellipse cx="155" cy="36" rx="65"  ry="34" fill="white" opacity=".45"/>
+      </svg>
+      <svg class="cloud-svg c3" viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="42" rx="85" ry="26" fill="white" opacity=".5"/>
+        <ellipse cx="70"  cy="34" rx="50" ry="30" fill="white" opacity=".5"/>
+        <ellipse cx="130" cy="30" rx="55" ry="28" fill="white" opacity=".5"/>
+      </svg>
+      <svg class="cloud-svg c4" viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="130" cy="55" rx="110" ry="34" fill="white" opacity=".38"/>
+        <ellipse cx="95"  cy="44" rx="65"  ry="38" fill="white" opacity=".38"/>
+        <ellipse cx="170" cy="40" rx="72"  ry="36" fill="white" opacity=".38"/>
+      </svg>
+    </div>
+
+    <!-- AVIÃO SVG PRINCIPAL -->
+    <div class="plane-hero-wrap" id="planeHero" aria-label="Avião Céu Tur">
+      <img class="plane-hero-img" src="assets/Avião.png" alt="Avião Céu Tur" />
+    </div>
+
+    <!-- LOGO + TEXTO HERO -->
+    <div class="hero-brand" id="heroBrand">
+      <div class="hero-logo">
+        <svg class="logo-star" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,3 24,14 36,14 27,21 30,33 20,26 10,33 13,21 4,14 16,14"
+                   fill="#f5c518" stroke="#e0a800" stroke-width=".5"/>
+        </svg>
+        <div class="logo-wordmark">
+          <span class="logo-ceu">CÉU</span><span class="logo-dash">-</span><span class="logo-tur">TUR</span>
+        </div>
+      </div>
+      <p class="hero-sub">Agência de Viagens &nbsp;·&nbsp; Consultora de Turismo</p>
+      <p class="hero-sub2">Sua Agência de Viagem</p>
+      <div class="hero-divider"></div>
+      <p class="scroll-hint">Role para baixo para explorar</p>
+      <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 5v14M5 12l7 7 7-7" stroke="white" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <svg viewBox="0 0 40 40" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,3 24,14 36,14 27,21 30,33 20,26 10,33 13,21 4,14 16,14" fill="#f5c518"/>
+        </svg>
+        CÉU-TUR
+      </div>
+      <ul class="nav-links">
+        <li><a href="#destinos">Destinos</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato" class="nav-btn">Fale Conosco</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="#destinos">Destinos</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Fale Conosco</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== DESTINOS ===== -->
+  <section class="section destinos" id="destinos">
+    <div class="container">
+      <p class="eyebrow">Para onde você quer ir?</p>
+      <h2 class="section-title">Destinos em Destaque</h2>
+      <div class="cards-grid">
+
+        <div class="dest-card reveal">
+          <div class="dest-img dest-beach">
+            <img src="https://images.unsplash.com/photo-1540202404-a2f29016b523?auto=format&fit=crop&w=900&q=80" alt="Praia tropical com mar azul no Nordeste" loading="lazy" />
+          </div>
+          <div class="dest-info">
+            <h3>Praias do Nordeste</h3>
+            <p>Sol, mar e cultura nordestina em um só pacote inesquecível.</p>
+            <span class="dest-tag">Praia</span>
+          </div>
+        </div>
+
+        <div class="dest-card reveal">
+          <div class="dest-img dest-europe">
+            <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80" alt="Torre Eiffel em Paris" loading="lazy" />
+          </div>
+          <div class="dest-info">
+            <h3>Europa Clássica</h3>
+            <p>Paris, Roma e Lisboa em roteiros personalizados para você.</p>
+            <span class="dest-tag">Internacional</span>
+          </div>
+        </div>
+
+        <div class="dest-card reveal">
+          <div class="dest-img dest-cruise">
+            <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=900&q=80" alt="Navio de cruzeiro no mar" loading="lazy" />
+          </div>
+          <div class="dest-info">
+            <h3>Cruzeiros</h3>
+            <p>Navegue pelos mares com todo conforto e estilo incomparáveis.</p>
+            <span class="dest-tag">Cruzeiro</span>
+          </div>
+        </div>
+
+        <div class="dest-card reveal">
+          <div class="dest-img dest-honey">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80" alt="Bangalo romantico sobre agua cristalina" loading="lazy" />
+          </div>
+          <div class="dest-info">
+            <h3>Lua de Mel</h3>
+            <p>Destinos românticos para começar uma nova e linda história.</p>
+            <span class="dest-tag">Romance</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVIÇOS ===== -->
+  <section class="section servicos" id="servicos">
+    <div class="container">
+      <p class="eyebrow">O que oferecemos</p>
+      <h2 class="section-title">Nossos Serviços</h2>
+      <div class="services-grid">
+
+        <div class="service-item reveal">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <!-- avião mini -->
+              <ellipse cx="24" cy="24" rx="16" ry="6" fill="#0b3d8c"/>
+              <path d="M8,24 Q4,24 3,24.5 Q4,21 8,21 Z" fill="#071e52"/>
+              <path d="M16,20 Q14,12 24,13 Q22,17 16,20Z" fill="#1a5cb0"/>
+              <path d="M16,28 Q14,36 24,35 Q22,31 16,28Z" fill="#1a5cb0"/>
+              <polygon points="8,21 5,16 10,18 8,24" fill="#071e52"/>
+            </svg>
+          </div>
+          <h4>Passagem Aérea</h4>
+          <p>Nacionais e internacionais com os melhores preços do mercado.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <!-- mala de viagem -->
+              <rect x="8" y="18" width="32" height="24" rx="4" fill="#0b3d8c"/>
+              <rect x="8" y="18" width="32" height="6" rx="2" fill="#071e52"/>
+              <rect x="17" y="12" width="14" height="8" rx="3" fill="none" stroke="#0b3d8c" stroke-width="3"/>
+              <rect x="10" y="26" width="28" height="2" rx="1" fill="#f5c518" opacity=".7"/>
+              <rect x="10" y="32" width="28" height="2" rx="1" fill="#f5c518" opacity=".7"/>
+              <circle cx="20" cy="42" r="3" fill="#1a5cb0"/>
+              <circle cx="28" cy="42" r="3" fill="#1a5cb0"/>
+            </svg>
+          </div>
+          <h4>Pacotes Completos</h4>
+          <p>Hospedagem, traslado e passeios em um único pacote conveniente.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <!-- escudo -->
+              <path d="M24,6 L38,11 L38,26 Q38,36 24,42 Q10,36 10,26 L10,11 Z" fill="#0b3d8c"/>
+              <path d="M24,10 L35,14 L35,26 Q35,33 24,38 Q13,33 13,26 L13,14 Z" fill="#1a5cb0"/>
+              <!-- check -->
+              <polyline points="17,24 22,29 31,19" fill="none" stroke="#f5c518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h4>Seguro de Viagem</h4>
+          <p>Viaje com tranquilidade e proteção total garantida para você.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <!-- família (3 silhuetas) -->
+              <circle cx="16" cy="12" r="5" fill="#0b3d8c"/>
+              <path d="M9,28 Q9,20 16,20 Q23,20 23,28 L23,36 L9,36 Z" fill="#0b3d8c"/>
+              <circle cx="32" cy="14" r="4" fill="#1a5cb0"/>
+              <path d="M26,36 Q26,22 32,22 Q38,22 38,36 Z" fill="#1a5cb0"/>
+              <circle cx="24" cy="9" r="3" fill="#f5c518"/>
+              <path d="M20,36 Q20,26 24,26 Q28,26 28,36 Z" fill="#f5c518"/>
+            </svg>
+          </div>
+          <h4>Viagens em Família</h4>
+          <p>Roteiros planejados com carinho para todas as idades e perfis.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <!-- globo -->
+              <circle cx="24" cy="24" r="17" fill="#0b3d8c" stroke="#1a5cb0" stroke-width="1.5"/>
+              <ellipse cx="24" cy="24" rx="8" ry="17" fill="none" stroke="#4a8fd0" stroke-width="1.5"/>
+              <line x1="7" y1="24" x2="41" y2="24" stroke="#4a8fd0" stroke-width="1.5"/>
+              <path d="M10,16 Q24,20 38,16" fill="none" stroke="#4a8fd0" stroke-width="1.2"/>
+              <path d="M10,32 Q24,28 38,32" fill="none" stroke="#4a8fd0" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <h4>Serviço Internacional</h4>
+          <p>Especialistas em destinos ao redor do mundo inteiro para você.</p>
+        </div>
+
+        <div class="service-item reveal">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <!-- navio mini -->
+              <rect x="12" y="22" width="24" height="14" rx="2" fill="#0b3d8c"/>
+              <rect x="12" y="22" width="24" height="5" fill="#071e52"/>
+              <circle cx="19" cy="25" r="2" fill="#7ab3e0"/>
+              <circle cx="24" cy="25" r="2" fill="#7ab3e0"/>
+              <circle cx="29" cy="25" r="2" fill="#7ab3e0"/>
+              <rect x="21" y="14" width="5" height="9" rx="1" fill="#1a5cb0"/>
+              <rect x="20" y="11" width="7" height="4" rx="1" fill="#0b3d8c"/>
+              <path d="M6,36 Q16,32 24,36 Q32,40 42,36" fill="none" stroke="#1a73e8" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M8,38 Q18,42 28,38 L24,44 Q16,46 10,44 Z" fill="#0b3d8c"/>
+            </svg>
+          </div>
+          <h4>Cruzeiros</h4>
+          <p>As melhores rotas marítimas nacionais e internacionais disponíveis.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="section sobre" id="sobre">
+    <div class="container sobre-inner">
+      <div class="sobre-text reveal">
+        <p class="eyebrow">Quem somos</p>
+        <h2 class="section-title">Voamos junto com você</h2>
+        <p class="sobre-desc">
+          A <strong>Céu Tur</strong> é uma agência de viagens localizada em Rolim de Moura – RO,
+          dedicada a transformar seus sonhos em destinos reais. Atendemos em horário
+          comercial e mantemos plantão 24h para que cada detalhe da sua viagem seja perfeito.
+        </p>
+        <p class="sobre-desc">
+          Com avaliação <strong>5.0 ★</strong> no Google, somos referência em atendimento
+          personalizado, pacotes nacionais e internacionais, lua de mel, cruzeiros e muito mais.
+        </p>
+        <a href="#contato" class="btn-primary">Fale com a gente</a>
+      </div>
+      <div class="sobre-badge reveal">
+        <div class="badge-ring">
+          <img class="badge-logo" src="assets/Logo.png" alt="Logo Céu Tur" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTATO ===== -->
+  <section class="section contato" id="contato">
+    <div class="container">
+      <p class="eyebrow">Vamos planejar?</p>
+      <h2 class="section-title">Entre em Contato</h2>
+      <div class="contato-grid">
+
+        <div class="contato-info reveal">
+          <div class="info-item">
+            <div class="info-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                      fill="#0b3d8c"/>
+                <circle cx="12" cy="9" r="2.5" fill="white"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Endereço</strong>
+              <p>Av. Francisco Chiquilito Erse, 6500<br>Rolim de Moura – RO, 76940-000</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"
+                      fill="#0b3d8c"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Telefone / WhatsApp</strong>
+              <p>(69) 98410-7044</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="#0b3d8c"/>
+                <polyline points="12,6 12,12 16,14" stroke="white" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Horário de atendimento</strong>
+              <p>Segunda a sexta: 08:00 às 18:00<br>Sábado: 08:00 às 12:00</p>
+              <strong>Plantão</strong>
+              <p>24h</p>
+            </div>
+          </div>
+          <a class="btn-primary whatsapp-btn"
+             href="https://wa.me/5569984107044" target="_blank">
+            <svg viewBox="0 0 24 24" width="18" height="18" style="vertical-align:middle;margin-right:6px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.112.554 4.1 1.523 5.826L.057 23.885l6.234-1.636A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.895 0-3.67-.516-5.197-1.415l-.372-.22-3.856 1.011 1.03-3.753-.242-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" fill="white"/>
+            </svg>
+            Chamar no WhatsApp
+          </a>
+        </div>
+
+        <form class="contato-form reveal" id="contactForm">
+          <input type="text" placeholder="Seu nome" required />
+          <input type="email" placeholder="Seu e-mail" required />
+          <select>
+            <option value="">Tipo de viagem...</option>
+            <option>Praia</option>
+            <option>Internacional</option>
+            <option>Cruzeiro</option>
+            <option>Lua de Mel</option>
+            <option>Família</option>
+          </select>
+          <textarea placeholder="Conte-nos sobre sua viagem dos sonhos..." rows="4"></textarea>
+          <button type="submit" class="btn-primary">
+            <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="#071e52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Enviar Mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <svg viewBox="0 0 40 40" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,3 24,14 36,14 27,21 30,33 20,26 10,33 13,21 4,14 16,14" fill="#f5c518"/>
+        </svg>
+        CÉU-TUR
+        <span class="footer-sep">·</span>
+        <span class="footer-sub">Sua Agência de Viagens</span>
+      </div>
+      <p class="footer-copy">© 2025 Céu Tur – Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
