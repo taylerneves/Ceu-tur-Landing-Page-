@@ -102,9 +102,11 @@ a, button, input, select, textarea { cursor: auto; }
 #planeHero {
     position: absolute;
     top: 20%;    /* Ajuste aqui para ele ficar acima do texto */
-    left: 30%;   /* Centralizado */
+    left: 33%;   /* Centralizado */
     z-index: 5;  /* Garante que fique atrás ou na frente de algo específico */
     transition: none; 
+    width: 550px;
+    max-width: 90vw;
 }
 
 #heroBrand {
@@ -465,7 +467,7 @@ a, button, input, select, textarea { cursor: auto; }
   .sobre-badge { display:flex; justify-content:center; }
   .contato-grid { grid-template-columns:1fr; }
 
-  #planeHero { top: 18%; width: 260px; }
+  #planeHero { top: 18%; width: 500px; left: 10%}
 }
 @media (max-width: 640px) {
   .nav-links { display:none; }
@@ -476,9 +478,9 @@ a, button, input, select, textarea { cursor: auto; }
   body { cursor: auto; }
   a,button,input,select,textarea { cursor: auto; }
 
-  #planeHero {
-        top: 15%; /* Sobe um pouco o avião no celular para dar espaço ao texto */
-        width: 200px; /* Diminui um pouco o tamanho no celular */
+  #planeHero { /* Sobe um pouco o avião no celular para dar espaço ao texto */
+        width: 400px; /* Diminui um pouco o tamanho no celular */
+        left: 10%;
     }
 }
 @media (max-width: 420px) {
