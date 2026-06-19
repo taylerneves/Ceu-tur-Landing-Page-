@@ -464,6 +464,8 @@ a, button, input, select, textarea { cursor: auto; }
   .sobre-inner { grid-template-columns:1fr; }
   .sobre-badge { display:flex; justify-content:center; }
   .contato-grid { grid-template-columns:1fr; }
+
+  #planeHero { top: 18%; width: 260px; }
 }
 @media (max-width: 640px) {
   .nav-links { display:none; }
@@ -473,9 +475,18 @@ a, button, input, select, textarea { cursor: auto; }
   .footer-inner { flex-direction:column; text-align:center; }
   body { cursor: auto; }
   a,button,input,select,textarea { cursor: auto; }
+
+  #planeHero {
+        top: 15%; /* Sobe um pouco o avião no celular para dar espaço ao texto */
+        width: 200px; /* Diminui um pouco o tamanho no celular */
+    }
 }
 @media (max-width: 420px) {
   .cards-grid, .services-grid { grid-template-columns:1fr; }
+  #planeHero {
+        top: 12%; /* Ajuste fino para telas muito pequenas */
+        width: 170px;
+    }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
