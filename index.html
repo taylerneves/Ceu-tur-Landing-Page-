@@ -107,7 +107,7 @@
       <h2 class="section-title">Destinos em Destaque</h2>
       <div class="cards-grid">
 
-        <div class="dest-card reveal">
+        <div class="dest-card reveal" tabindex="0" aria-expanded="false">
           <div class="dest-img dest-beach">
             <img src="https://images.unsplash.com/photo-1540202404-a2f29016b523?auto=format&fit=crop&w=900&q=80" alt="Praia tropical com mar azul no Nordeste" loading="lazy" />
           </div>
@@ -115,10 +115,18 @@
             <h3>Praias do Nordeste</h3>
             <p>Sol, mar e cultura nordestina em um só pacote inesquecível.</p>
             <span class="dest-tag">Praia</span>
+            <div class="dest-options" aria-hidden="true">
+              <div class="dest-option-group">
+                <h4>Destinos Nacionais</h4>
+                <button type="button" class="dest-option-btn" data-destination="Porto de Galinhas" data-category="Nacional">Porto de Galinhas</button>
+                <button type="button" class="dest-option-btn" data-destination="Fernando de Noronha" data-category="Nacional">Fernando de Noronha</button>
+                <button type="button" class="dest-option-btn" data-destination="Jericoacoara" data-category="Nacional">Jericoacoara</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="dest-card reveal">
+        <div class="dest-card reveal" tabindex="0" aria-expanded="false">
           <div class="dest-img dest-europe">
             <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80" alt="Torre Eiffel em Paris" loading="lazy" />
           </div>
@@ -126,10 +134,18 @@
             <h3>Europa Clássica</h3>
             <p>Paris, Roma e Lisboa em roteiros personalizados para você.</p>
             <span class="dest-tag">Internacional</span>
+            <div class="dest-options" aria-hidden="true">
+              <div class="dest-option-group">
+                <h4>Destinos Internacionais</h4>
+                <button type="button" class="dest-option-btn" data-destination="Paris" data-category="Internacional">Paris</button>
+                <button type="button" class="dest-option-btn" data-destination="Lisboa" data-category="Internacional">Lisboa</button>
+                <button type="button" class="dest-option-btn" data-destination="Roma" data-category="Internacional">Roma</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="dest-card reveal">
+        <div class="dest-card reveal" tabindex="0" aria-expanded="false">
           <div class="dest-img dest-cruise">
             <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=900&q=80" alt="Navio de cruzeiro no mar" loading="lazy" />
           </div>
@@ -137,10 +153,22 @@
             <h3>Cruzeiros</h3>
             <p>Navegue pelos mares com todo conforto e estilo incomparáveis.</p>
             <span class="dest-tag">Cruzeiro</span>
+            <div class="dest-options" aria-hidden="true">
+              <div class="dest-option-group">
+                <h4>Destinos Nacionais</h4>
+                <button type="button" class="dest-option-btn" data-destination="Cruzeiro Nordeste" data-category="Nacional">Cruzeiro Nordeste</button>
+                <button type="button" class="dest-option-btn" data-destination="Cruzeiro Amazônia" data-category="Nacional">Cruzeiro Amazônia</button>
+              </div>
+              <div class="dest-option-group">
+                <h4>Destinos Internacionais</h4>
+                <button type="button" class="dest-option-btn" data-destination="Cruzeiro Caribe" data-category="Internacional">Cruzeiro Caribe</button>
+                <button type="button" class="dest-option-btn" data-destination="Cruzeiro Mediterrâneo" data-category="Internacional">Cruzeiro Mediterrâneo</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="dest-card reveal">
+        <div class="dest-card reveal" tabindex="0" aria-expanded="false">
           <div class="dest-img dest-honey">
             <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80" alt="Bangalo romantico sobre agua cristalina" loading="lazy" />
           </div>
@@ -148,6 +176,18 @@
             <h3>Lua de Mel</h3>
             <p>Destinos românticos para começar uma nova e linda história.</p>
             <span class="dest-tag">Romance</span>
+            <div class="dest-options" aria-hidden="true">
+              <div class="dest-option-group">
+                <h4>Destinos Nacionais</h4>
+                <button type="button" class="dest-option-btn" data-destination="Fernando de Noronha" data-category="Nacional">Fernando de Noronha</button>
+                <button type="button" class="dest-option-btn" data-destination="Gramado" data-category="Nacional">Gramado</button>
+              </div>
+              <div class="dest-option-group">
+                <h4>Destinos Internacionais</h4>
+                <button type="button" class="dest-option-btn" data-destination="Maldivas" data-category="Internacional">Maldivas</button>
+                <button type="button" class="dest-option-btn" data-destination="Santorini" data-category="Internacional">Santorini</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -161,12 +201,12 @@
       <p class="eyebrow">O que oferecemos</p>
       <h2 class="section-title">Nossos Serviços</h2>
       <div class="services-grid">
-
-        <div class="service-item reveal">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-              <!-- avião mini -->
-              <ellipse cx="24" cy="24" rx="16" ry="6" fill="#0b3d8c"/>
+        <div class="services-track">
+          <div class="service-item reveal">
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <!-- avião mini -->
+                <ellipse cx="24" cy="24" rx="16" ry="6" fill="#0b3d8c"/>
               <path d="M8,24 Q4,24 3,24.5 Q4,21 8,21 Z" fill="#071e52"/>
               <path d="M16,20 Q14,12 24,13 Q22,17 16,20Z" fill="#1a5cb0"/>
               <path d="M16,28 Q14,36 24,35 Q22,31 16,28Z" fill="#1a5cb0"/>
@@ -258,6 +298,7 @@
           <p>As melhores rotas marítimas nacionais e internacionais disponíveis.</p>
         </div>
 
+        </div>
       </div>
     </div>
   </section>
@@ -346,17 +387,43 @@
         </div>
 
         <form class="contato-form reveal" id="contactForm">
-          <input type="text" placeholder="Seu nome" required />
-          <input type="email" placeholder="Seu e-mail" required />
-          <select>
-            <option value="">Tipo de viagem...</option>
-            <option>Praia</option>
-            <option>Internacional</option>
-            <option>Cruzeiro</option>
-            <option>Lua de Mel</option>
-            <option>Família</option>
-          </select>
-          <textarea placeholder="Conte-nos sobre sua viagem dos sonhos..." rows="4"></textarea>
+          <input type="text" id="nameInput" name="nome" placeholder="Seu nome" required />
+          <input type="email" id="emailInput" name="email" placeholder="Seu e-mail" required />
+
+          <div class="toggle-switch" role="group" aria-label="Escolher tipo de atendimento">
+            <span>Quero:</span>
+            <div class="toggle-buttons">
+              <button type="button" class="toggle-btn active" data-request-type="viagem">Viagem</button>
+              <button type="button" class="toggle-btn" data-request-type="servico">Serviço</button>
+            </div>
+          </div>
+
+          <input type="hidden" id="requestTypeInput" name="requestType" value="viagem" />
+
+          <div class="field-group viagem-group">
+            <input type="text" id="destinationInput" name="destino" placeholder="Destino desejado" />
+            <select id="typeSelect" name="tipo">
+              <option value="">Tipo de viagem...</option>
+              <option>Praia</option>
+              <option>Internacional</option>
+              <option>Cruzeiro</option>
+              <option>Lua de Mel</option>
+              <option>Família</option>
+            </select>
+          </div>
+
+          <div class="field-group servico-group hidden">
+            <select id="serviceSelect" name="servico">
+              <option value="">Escolha um serviço...</option>
+              <option>Tirar passaporte</option>
+              <option>Seguro viagem</option>
+              <option>Visto</option>
+              <option>Assessoria de roteiros</option>
+              <option>Passagem aérea</option>
+            </select>
+          </div>
+
+          <textarea id="messageInput" name="descricao" placeholder="Conte-nos sobre sua viagem dos sonhos..." rows="4"></textarea>
           <button type="submit" class="btn-primary">
             <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="#071e52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -12,12 +12,25 @@
     const hero = document.getElementById("hero");
     const heroBrand = document.getElementById("heroBrand");
     const contactForm = document.getElementById("contactForm");
+    const destinationInput = document.getElementById("destinationInput");
+    const travelTypeSelect = document.getElementById("typeSelect");
+    const serviceSelect = document.getElementById("serviceSelect");
+    const requestTypeInput = document.getElementById("requestTypeInput");
+    const messageTextarea = document.getElementById("messageInput");
+
+    const toggleButtons = document.querySelectorAll(".toggle-btn");
+    const viagemGroup = document.querySelector(".viagem-group");
+    const servicoGroup = document.querySelector(".servico-group");
+    const servicesGrid = document.querySelector(".services-grid");
 
     /* ── Estado ──────────────────────────────────── */
     let navVisible = false;
     let planeTarget = 0;
     let planeProgress = 0;
     let planeRaf = null;
+    let servicesScrollRaf = null;
+    let servicesScrollPaused = false;
+    let servicesScrollPosition = 0;
 
     /* ================================================================
        SCROLL PRINCIPAL
@@ -125,9 +138,124 @@
         ".dest-card, .service-item, .contato-info, .contato-form, .sobre-text, .sobre-badge"
     );
 
+    const destCards = document.querySelectorAll(".dest-card");
+    const destOptionsContainer = document.querySelector(".cards-grid");
+
     revealEls.forEach((el, i) => {
         el.style.transitionDelay = (i % 4) * 90 + "ms";
     });
+
+    destCards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+            if (event.target.closest(".dest-option-btn")) {
+                return;
+            }
+            toggleDestCard(card);
+        });
+
+        card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                if (event.target.closest(".dest-option-btn")) {
+                    return;
+                }
+                event.preventDefault();
+                toggleDestCard(card);
+            }
+        });
+    });
+
+    destOptionsContainer.addEventListener("click", (event) => {
+        const button = event.target.closest(".dest-option-btn");
+        if (!button) {
+            return;
+        }
+        event.stopPropagation();
+        const destination = button.dataset.destination;
+        const category = button.dataset.category;
+        fillContactFormDestination(destination, category);
+    });
+
+    toggleButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const requestType = button.dataset.requestType;
+            setRequestType(requestType);
+        });
+    });
+
+    function setRequestType(requestType) {
+        toggleButtons.forEach((button) => {
+            button.classList.toggle("active", button.dataset.requestType === requestType);
+        });
+        if (requestTypeInput) {
+            requestTypeInput.value = requestType;
+        }
+        if (viagemGroup && servicoGroup) {
+            viagemGroup.classList.toggle("hidden", requestType !== "viagem");
+            servicoGroup.classList.toggle("hidden", requestType !== "servico");
+        }
+        if (requestType === "viagem") {
+            destinationInput?.focus();
+        } else {
+            serviceSelect?.focus();
+        }
+    }
+
+    let activeDestCard = null;
+
+    function closeAllDestCards() {
+        destCards.forEach((card) => {
+            card.classList.remove("active");
+            card.setAttribute("aria-expanded", "false");
+            const options = card.querySelector(".dest-options");
+            if (options) {
+                options.setAttribute("aria-hidden", "true");
+                options.style.display = "none";
+            }
+        });
+        activeDestCard = null;
+    }
+
+    function openDestCard(card) {
+        const options = card.querySelector(".dest-options");
+        if (!options) return;
+
+        card.classList.add("active");
+        card.setAttribute("aria-expanded", "true");
+        options.setAttribute("aria-hidden", "false");
+        options.style.display = "block";
+        activeDestCard = card;
+    }
+
+    function toggleDestCard(card) {
+        const isActive = card === activeDestCard;
+        if (isActive) {
+            closeAllDestCards();
+            return;
+        }
+        closeAllDestCards();
+        openDestCard(card);
+    }
+
+    function fillContactFormDestination(destination, category) {
+        setRequestType("viagem");
+        if (destinationInput) {
+            destinationInput.value = destination;
+        }
+        if (travelTypeSelect && category) {
+            const validValue = Array.from(travelTypeSelect.options).find((option) => option.value === category);
+            if (validValue) {
+                travelTypeSelect.value = category;
+            }
+        }
+        if (messageTextarea) {
+            messageTextarea.value = `Olá, gostaria de receber mais informações sobre o destino ${destination}.`;
+        }
+        if (contactForm) {
+            contactForm.scrollIntoView({ behavior: "smooth", block: "center" });
+            contactForm.classList.add("form-highlight");
+            setTimeout(() => contactForm.classList.remove("form-highlight"), 1800);
+        }
+    }
 
     function revealElements() {
         const trigger = window.innerHeight * 0.88;
@@ -137,9 +265,38 @@
             }
         });
     }
+    const servicesTrack = document.querySelector(".services-track");
+
     window.addEventListener("load", () => {
         updatePlaneTarget(window.scrollY);
+        duplicateServiceTrack();
     });
+
+    function duplicateServiceTrack() {
+        if (!servicesTrack) return;
+        const items = Array.from(servicesTrack.querySelectorAll(".service-item:not(.cloned)"));
+        if (items.length === 0) return;
+        items.forEach((item) => {
+            const clone = item.cloneNode(true);
+            clone.classList.add("cloned");
+            servicesTrack.appendChild(clone);
+        });
+    }
+
+    if (servicesTrack) {
+        servicesTrack.addEventListener("mouseenter", () => {
+            servicesTrack.style.animationPlayState = "paused";
+        });
+        servicesTrack.addEventListener("mouseleave", () => {
+            servicesTrack.style.animationPlayState = "running";
+        });
+        servicesTrack.addEventListener("touchstart", () => {
+            servicesTrack.style.animationPlayState = "paused";
+        }, { passive: true });
+        servicesTrack.addEventListener("touchend", () => {
+            servicesTrack.style.animationPlayState = "running";
+        });
+    }
 
     /* ================================================================
        MENU MOBILE
@@ -191,34 +348,50 @@
             e.preventDefault();
 
             /* coleta campos */
-            const fields = contactForm.querySelectorAll("input, select, textarea");
-            const nome = fields[0].value.trim();
-            const email = fields[1].value.trim();
-            const tipo = fields[2].value.trim() || "não informado";
-            const descricao = fields[3].value.trim();
+            const nome = contactForm.querySelector("input[name='nome']").value.trim();
+            const email = contactForm.querySelector("input[name='email']").value.trim();
+            const requestType = contactForm.querySelector("input[name='requestType']").value;
+            const destino = contactForm.querySelector("input[name='destino']").value.trim() || "não informado";
+            const tipo = contactForm.querySelector("select[name='tipo']").value.trim() || "não informado";
+            const servico = contactForm.querySelector("select[name='servico']").value.trim() || "não informado";
+            const descricao = contactForm.querySelector("textarea[name='descricao']").value.trim();
 
-            /* artigo de acordo com o tipo de viagem */
-            const artigos = {
-                "Praia": "um pacote de praia",
-                "Internacional": "uma viagem internacional",
-                "Cruzeiro": "um cruzeiro",
-                "Lua de Mel": "um pacote de lua de mel",
-                "Família": "um pacote para família",
-            };
-            const tipoTexto = artigos[tipo] || `uma viagem do tipo "${tipo}"`;
+            function buildTravelMessage() {
+                const artigos = {
+                    "Praia": "um pacote de praia",
+                    "Internacional": "uma viagem internacional",
+                    "Cruzeiro": "um cruzeiro",
+                    "Lua de Mel": "um pacote de lua de mel",
+                    "Família": "um pacote para família",
+                };
+                const tipoTexto = artigos[tipo] || `uma viagem do tipo "${tipo}"`;
+                let travelMsg = `Olá Céu Tur, eu me chamo *${nome}* e quero saber mais sobre a viagem para *${destino}*.`;
+                travelMsg += `\n\nEstou interessado em ${tipoTexto}.`;
+                return travelMsg;
+            }
 
-            /* monta mensagem humanizada */
-            let msg = `Olá Céu Tur, eu me chamo *${nome}* e vim pelo site de vocês, poderia me ajudar a encontrar ${tipoTexto}?`;
+            function buildServiceMessage() {
+                let serviceMsg = `Olá Céu Tur, eu me chamo *${nome}* e gostaria de contratar o serviço *${servico}*.`;
+                if (destino) {
+                    serviceMsg += `\n\nSe necessário, o destino ou local preferido é *${destino}*.`;
+                }
+                return serviceMsg;
+            }
+
+            let msg;
+            if (requestType === "servico") {
+                msg = buildServiceMessage();
+            } else {
+                msg = buildTravelMessage();
+            }
 
             if (descricao) {
                 msg += `\n\nVou explicar melhor... ${descricao}`;
             }
-
             if (email) {
                 msg += `\n\n📧 Meu e-mail para contato: ${email}`;
             }
 
-            /* abre WhatsApp */
             const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
             window.open(url, "_blank");
 
