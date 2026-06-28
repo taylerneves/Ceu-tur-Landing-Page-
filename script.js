@@ -274,13 +274,23 @@
 
     function duplicateServiceTrack() {
         if (!servicesTrack) return;
-        const items = Array.from(servicesTrack.querySelectorAll(".service-item:not(.cloned)"));
+
+        // Remove clones antigos (caso exista algum por recarregamento parcial)
+        servicesTrack.querySelectorAll(".service-item.cloned").forEach((n) => n.remove());
+
+        const items = Array.from(servicesTrack.querySelectorAll(".service-item"));
         if (items.length === 0) return;
+
+        // Para ficar com “cara” de infinito contínuo, duplicamos a lista inteira.
+        // A animação em CSS move -50% assumindo que o conteúdo duplicado permite o loop.
+        // Assim, quando terminar a primeira metade, começa a mesma sequência novamente.
+        const fragment = document.createDocumentFragment();
         items.forEach((item) => {
             const clone = item.cloneNode(true);
             clone.classList.add("cloned");
-            servicesTrack.appendChild(clone);
+            fragment.appendChild(clone);
         });
+        servicesTrack.appendChild(fragment);
     }
 
     if (servicesTrack) {
