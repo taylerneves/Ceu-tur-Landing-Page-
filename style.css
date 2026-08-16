@@ -445,8 +445,8 @@ textarea {
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.25rem;
   margin-top: 2.5rem;
 }
 
@@ -492,7 +492,7 @@ textarea {
 
 .dest-info {
   position: relative;
-  padding: 1.3rem 1.2rem 1rem;
+  padding: 1.15rem 1rem 1rem;
   display: grid;
   gap: .75rem;
 }
@@ -500,14 +500,14 @@ textarea {
 .dest-info h3 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 0;
   color: var(--blue-dk);
 }
 
 .dest-info p {
   color: var(--gray);
-  font-size: .9rem;
+  font-size: .86rem;
   line-height: 1.7;
   margin: 0;
 }
@@ -587,6 +587,52 @@ textarea {
 
 .dest-option-group:empty {
   display: none;
+}
+
+.dest-region-group {
+  display: grid;
+  gap: .65rem;
+  padding-top: .75rem;
+}
+
+.dest-region-btn {
+  width: 100%;
+  border: 1px solid rgba(11, 61, 140, .18);
+  border-radius: .85rem;
+  background: #eef4ff;
+  color: var(--blue-dk);
+  padding: .8rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .9rem;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s;
+}
+
+.dest-region-btn::after {
+  content: "+";
+  float: right;
+  font-size: 1rem;
+}
+
+.dest-region-group.active .dest-region-btn {
+  background: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.dest-region-group.active .dest-region-btn::after {
+  content: "-";
+}
+
+.dest-region-states {
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: .5rem;
+}
+
+.dest-region-group.active .dest-region-states {
+  display: grid;
 }
 
 .contato-form input:focus,
@@ -939,6 +985,12 @@ textarea {
   display: none !important;
 }
 
+@media (max-width: 1100px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 960px) {
   .services-grid {
     gap: 1rem;
@@ -973,7 +1025,7 @@ textarea {
   }
 
   .cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dest-card,
@@ -985,7 +1037,7 @@ textarea {
   }
 
   .cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     overflow: visible;
   }
 
@@ -1139,7 +1191,7 @@ textarea {
       max-width: 218px;
     }
   .cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dest-card,
@@ -1241,5 +1293,111 @@ textarea {
   *::after {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
+  }
+}
+
+/* ================================================================
+   MODAL DE DESTINOS
+   ================================================================ */
+.dest-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(7, 30, 82, .58);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease;
+}
+
+.dest-modal-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.dest-modal-open {
+  overflow: hidden;
+}
+
+.dest-modal-close {
+  position: absolute;
+  top: .85rem;
+  right: .85rem;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .94);
+  color: var(--blue-dk);
+  font-size: 1.8rem;
+  line-height: 1;
+  box-shadow: 0 10px 22px rgba(7, 30, 82, .18);
+  cursor: pointer;
+}
+
+.dest-card.active {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  width: min(520px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, .45);
+  box-shadow: 0 30px 90px rgba(7, 30, 82, .35);
+  transform: translate(-50%, -50%) scale(1) !important;
+  animation: destModalIn .28s ease both;
+}
+
+.dest-card.active .dest-modal-close {
+  display: inline-flex;
+}
+
+.dest-card.active .dest-img {
+  height: 230px;
+}
+
+.dest-card.active .dest-options {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100%;
+  margin-top: .35rem;
+  padding: .9rem 0 .25rem !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.dest-card.active .dest-option-group {
+  grid-template-columns: 1fr;
+}
+
+@keyframes destModalIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -44%) scale(.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .dest-card.active {
+    width: min(420px, calc(100vw - 1.25rem));
+    max-height: calc(100vh - 1.25rem);
+  }
+
+  .dest-card.active .dest-img {
+    height: 190px;
   }
 }

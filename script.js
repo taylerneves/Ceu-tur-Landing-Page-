@@ -140,17 +140,35 @@
 
     const destCards = document.querySelectorAll(".dest-card");
     const destOptionsContainer = document.querySelector(".cards-grid");
+    const destModalOverlay = document.createElement("div");
+    destModalOverlay.className = "dest-modal-overlay";
+    destModalOverlay.setAttribute("aria-hidden", "true");
+    document.body.appendChild(destModalOverlay);
 
     revealEls.forEach((el, i) => {
         el.style.transitionDelay = (i % 4) * 90 + "ms";
     });
 
     destCards.forEach((card) => {
+        const closeButton = document.createElement("button");
+        closeButton.type = "button";
+        closeButton.className = "dest-modal-close";
+        closeButton.setAttribute("aria-label", "Fechar destino");
+        closeButton.innerHTML = "&times;";
+        card.appendChild(closeButton);
+
         card.addEventListener("click", (event) => {
             if (event.target.closest(".dest-option-btn")) {
                 return;
             }
-            toggleDestCard(card);
+            if (event.target.closest(".dest-modal-close")) {
+                event.stopPropagation();
+                closeAllDestCards();
+                return;
+            }
+            if (card !== activeDestCard) {
+                openDestCard(card);
+            }
         });
 
         card.addEventListener("keydown", (event) => {
@@ -159,12 +177,31 @@
                     return;
                 }
                 event.preventDefault();
-                toggleDestCard(card);
+                openDestCard(card);
             }
         });
     });
 
+    destModalOverlay.addEventListener("click", closeAllDestCards);
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && activeDestCard) {
+            closeAllDestCards();
+        }
+    });
+
     destOptionsContainer.addEventListener("click", (event) => {
+        const regionButton = event.target.closest(".dest-region-btn");
+        if (regionButton) {
+            event.stopPropagation();
+            const regionGroup = regionButton.closest(".dest-region-group");
+            const states = regionGroup?.querySelector(".dest-region-states");
+            const isOpen = regionGroup?.classList.toggle("active");
+            regionButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
+            states?.setAttribute("aria-hidden", String(!isOpen));
+            return;
+        }
+
         const button = event.target.closest(".dest-option-btn");
         if (!button) {
             return;
@@ -173,6 +210,7 @@
         const destination = button.dataset.destination;
         const category = button.dataset.category;
         fillContactFormDestination(destination, category);
+        closeAllDestCards();
     });
 
     toggleButtons.forEach((button) => {
@@ -193,6 +231,15 @@
             viagemGroup.classList.toggle("hidden", requestType !== "viagem");
             servicoGroup.classList.toggle("hidden", requestType !== "servico");
         }
+        if (travelTypeSelect && serviceSelect) {
+            travelTypeSelect.required = requestType === "viagem";
+            travelTypeSelect.disabled = requestType !== "viagem";
+            travelTypeSelect.setCustomValidity("");
+
+            serviceSelect.required = requestType === "servico";
+            serviceSelect.disabled = requestType !== "servico";
+            serviceSelect.setCustomValidity("");
+        }
         if (requestType === "viagem") {
             destinationInput?.focus();
         } else {
@@ -210,8 +257,16 @@
             if (options) {
                 options.setAttribute("aria-hidden", "true");
                 options.style.display = "none";
+                options.querySelectorAll(".dest-region-group.active").forEach((group) => {
+                    group.classList.remove("active");
+                    group.querySelector(".dest-region-btn")?.setAttribute("aria-expanded", "false");
+                    group.querySelector(".dest-region-states")?.setAttribute("aria-hidden", "true");
+                });
             }
         });
+        document.body.classList.remove("dest-modal-open");
+        destModalOverlay.classList.remove("visible");
+        destModalOverlay.setAttribute("aria-hidden", "true");
         activeDestCard = null;
     }
 
@@ -219,21 +274,15 @@
         const options = card.querySelector(".dest-options");
         if (!options) return;
 
+        closeAllDestCards();
         card.classList.add("active");
         card.setAttribute("aria-expanded", "true");
         options.setAttribute("aria-hidden", "false");
         options.style.display = "block";
+        document.body.classList.add("dest-modal-open");
+        destModalOverlay.classList.add("visible");
+        destModalOverlay.setAttribute("aria-hidden", "false");
         activeDestCard = card;
-    }
-
-    function toggleDestCard(card) {
-        const isActive = card === activeDestCard;
-        if (isActive) {
-            closeAllDestCards();
-            return;
-        }
-        closeAllDestCards();
-        openDestCard(card);
     }
 
     function fillContactFormDestination(destination, category) {
@@ -271,9 +320,10 @@
         updatePlaneTarget(window.scrollY);
         duplicateServiceTrack();
     });
+    window.addEventListener("resize", duplicateServiceTrack);
 
     function duplicateServiceTrack() {
-        if (!servicesTrack) return;
+        if (!servicesTrack || !servicesGrid) return;
 
         // Remove clones antigos (caso exista algum por recarregamento parcial)
         servicesTrack.querySelectorAll(".service-item.cloned").forEach((n) => n.remove());
@@ -281,15 +331,18 @@
         const items = Array.from(servicesTrack.querySelectorAll(".service-item"));
         if (items.length === 0) return;
 
-        // Para ficar com “cara” de infinito contínuo, duplicamos a lista inteira.
-        // A animação em CSS move -50% assumindo que o conteúdo duplicado permite o loop.
-        // Assim, quando terminar a primeira metade, começa a mesma sequência novamente.
+        const baseWidth = servicesTrack.scrollWidth;
+        const repeatsPerHalf = Math.max(1, Math.ceil((servicesGrid.offsetWidth * 1.2) / baseWidth));
         const fragment = document.createDocumentFragment();
-        items.forEach((item) => {
-            const clone = item.cloneNode(true);
-            clone.classList.add("cloned");
-            fragment.appendChild(clone);
-        });
+
+        for (let repeat = 1; repeat < repeatsPerHalf * 2; repeat += 1) {
+            items.forEach((item) => {
+                const clone = item.cloneNode(true);
+                clone.classList.add("cloned");
+                fragment.appendChild(clone);
+            });
+        }
+
         servicesTrack.appendChild(fragment);
     }
 
@@ -358,13 +411,35 @@
             e.preventDefault();
 
             /* coleta campos */
-            const nome = contactForm.querySelector("input[name='nome']").value.trim();
-            const email = contactForm.querySelector("input[name='email']").value.trim();
+            const nameInput = contactForm.querySelector("input[name='nome']");
+            const typeSelect = contactForm.querySelector("select[name='tipo']");
+            const serviceSelect = contactForm.querySelector("select[name='servico']");
+            const nome = nameInput.value.trim();
+            const email = contactForm.querySelector("input[name='email']")?.value.trim() || "";
             const requestType = contactForm.querySelector("input[name='requestType']").value;
-            const destino = contactForm.querySelector("input[name='destino']").value.trim() || "não informado";
-            const tipo = contactForm.querySelector("select[name='tipo']").value.trim() || "não informado";
-            const servico = contactForm.querySelector("select[name='servico']").value.trim() || "não informado";
+            const destino = contactForm.querySelector("input[name='destino']").value.trim();
+            const tipo = typeSelect.value.trim();
+            const servico = serviceSelect.value.trim();
             const descricao = contactForm.querySelector("textarea[name='descricao']").value.trim();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            if (requestType === "viagem" && !tipo) {
+                typeSelect.disabled = false;
+                typeSelect.required = true;
+                typeSelect.reportValidity();
+                return;
+            }
+
+            if (requestType === "servico" && !servico) {
+                serviceSelect.disabled = false;
+                serviceSelect.required = true;
+                serviceSelect.reportValidity();
+                return;
+            }
 
             function buildTravelMessage() {
                 const artigos = {
@@ -373,9 +448,13 @@
                     "Cruzeiro": "um cruzeiro",
                     "Lua de Mel": "um pacote de lua de mel",
                     "Família": "um pacote para família",
+                    "Brasil": "uma viagem pelo Brasil",
                 };
                 const tipoTexto = artigos[tipo] || `uma viagem do tipo "${tipo}"`;
-                let travelMsg = `Olá Céu Tur, eu me chamo *${nome}* e quero saber mais sobre a viagem para *${destino}*.`;
+                let travelMsg = `Olá Céu Tur, eu me chamo *${nome}* e quero saber mais sobre uma viagem.`;
+                if (destino) {
+                    travelMsg = `Olá Céu Tur, eu me chamo *${nome}* e quero saber mais sobre a viagem para *${destino}*.`;
+                }
                 travelMsg += `\n\nEstou interessado em ${tipoTexto}.`;
                 return travelMsg;
             }
