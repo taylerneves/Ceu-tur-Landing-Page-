@@ -135,7 +135,7 @@
        SCROLL REVEAL
        ================================================================ */
     const revealEls = document.querySelectorAll(
-        ".dest-card, .service-item, .contato-info, .contato-form, .sobre-text, .sobre-badge"
+        ".dest-card, .service-item, .contato-info, .contato-form, .sobre-text, .sobre-badge, .avaliacoes-header, .review-card, .avaliacoes-cta"
     );
 
     const destCards = document.querySelectorAll(".dest-card");

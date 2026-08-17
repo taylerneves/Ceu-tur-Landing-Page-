@@ -61,7 +61,7 @@ textarea {
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--yellow);
+  color: var(--blue-dk);
   margin-bottom: .5rem;
 }
 
@@ -856,6 +856,152 @@ textarea {
 }
 
 /* ================================================================
+   AVALIAÇÕES
+   ================================================================ */
+.avaliacoes {
+  background: linear-gradient(180deg, #edcd4d 70%,var(--white) 100%);
+}
+
+.avaliacoes-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+}
+
+.avaliacoes-desc {
+  max-width: 680px;
+  color: var(--gray);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.avaliacoes-score {
+  min-width: 170px;
+  padding: 1.4rem;
+  border: 1px solid rgba(245, 197, 24, .45);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 12px 32px rgba(245, 197, 24, .18);
+  text-align: center;
+}
+
+.score-number {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--blue-dk);
+  line-height: 1;
+}
+
+.score-stars,
+.review-stars {
+  display: block;
+  color: var(--yellow);
+  letter-spacing: .08em;
+  line-height: 1;
+}
+
+.score-stars {
+  margin: .55rem 0 .45rem;
+  font-size: 1rem;
+}
+
+.score-label {
+  color: var(--gray);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 250px;
+  padding: 1.45rem;
+  border: 1px solid rgba(245, 197, 24, .26);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(245, 197, 24, .1);
+  transition: transform .3s, box-shadow .3s, border-color .3s, opacity .7s cubic-bezier(.16, 1, .3, 1);
+}
+
+.review-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--yellow);
+  box-shadow: 0 18px 42px rgba(245, 197, 24, .2);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+}
+
+.review-avatar {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--blue-dk);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+}
+
+.review-top h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .95rem;
+  line-height: 1.3;
+  color: var(--blue-dk);
+}
+
+.review-top p {
+  margin-top: .2rem;
+  color: var(--gray);
+  font-size: .78rem;
+}
+
+.review-card > p {
+  color: var(--gray);
+  font-size: .92rem;
+  line-height: 1.75;
+}
+
+.avaliacoes-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #071e52 0%, #0b3d8c 100%);
+}
+
+.avaliacoes-cta p {
+  color: rgba(255, 255, 255, .86);
+  font-size: .98rem;
+  line-height: 1.6;
+}
+
+.avaliacoes-cta .btn-primary {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* ================================================================
    CONTATO
    ================================================================ */
 .contato {
@@ -1171,6 +1317,24 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .avaliacoes-header {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .avaliacoes-score {
+    width: 100%;
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .avaliacoes-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .sobre-badge {
     display: flex;
     justify-content: center;
@@ -1236,6 +1400,10 @@ textarea {
   }
 
   .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-grid {
     grid-template-columns: 1fr;
   }
 
